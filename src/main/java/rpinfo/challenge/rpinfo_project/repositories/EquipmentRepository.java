@@ -1,5 +1,7 @@
 package rpinfo.challenge.rpinfo_project.repositories;
 
-public class EquipmentRepository {
-    
+import org.springframework.data.jpa.repository.JpaRepository;
+import rpinfo.challenge.rpinfo_project.models.Equipment;
+
+public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
 }
