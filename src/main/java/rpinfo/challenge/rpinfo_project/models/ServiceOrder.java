@@ -1,11 +1,15 @@
 package rpinfo.challenge.rpinfo_project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceOrder {
 
     @Id
@@ -14,7 +18,6 @@ public class ServiceOrder {
     private String description;
     private boolean pending;
     private boolean started;
-    private boolean completed;
 
     public Long getId() {
         return id;
@@ -39,11 +42,5 @@ public class ServiceOrder {
     }
     public void setStarted(boolean started) {
         this.started = started;
-    }
-    public boolean isCompleted() {
-        return completed;
-    }
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
     }
 }
