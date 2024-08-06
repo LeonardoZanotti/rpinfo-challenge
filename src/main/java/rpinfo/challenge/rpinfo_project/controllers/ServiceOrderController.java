@@ -10,7 +10,7 @@ import rpinfo.challenge.rpinfo_project.services.ServiceOrderService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/service-orders")
+@RequestMapping("/service-order")
 public class ServiceOrderController {
 
     @Autowired

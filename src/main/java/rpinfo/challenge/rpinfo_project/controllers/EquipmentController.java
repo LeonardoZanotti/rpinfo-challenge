@@ -8,7 +8,7 @@ import rpinfo.challenge.rpinfo_project.models.Equipment;
 import rpinfo.challenge.rpinfo_project.services.EquipmentService;
 
 @RestController
-@RequestMapping("/equipments")
+@RequestMapping("/equipment")
 public class EquipmentController {
 
     @Autowired
