@@ -32,8 +32,8 @@ public class ServiceOrderService {
 
     public ServiceOrder completeServiceOrder(Long id) {
         ServiceOrder serviceOrder = serviceOrderRepository.findById(id).orElse(null);
-        if (serviceOrder != null && !serviceOrder.isCompleted()) {
-            serviceOrder.setCompleted(true);
+        if (serviceOrder != null && serviceOrder.isPending()) {
+            serviceOrder.setPending(false);
             return serviceOrderRepository.save(serviceOrder);
         }
         return null;
