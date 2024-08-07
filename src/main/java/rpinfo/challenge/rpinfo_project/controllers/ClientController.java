@@ -8,7 +8,7 @@ import rpinfo.challenge.rpinfo_project.models.Client;
 import rpinfo.challenge.rpinfo_project.services.ClientService;
 
 @RestController
-@RequestMapping("/clients")
+@RequestMapping("/client")
 public class ClientController {
 
     @Autowired
