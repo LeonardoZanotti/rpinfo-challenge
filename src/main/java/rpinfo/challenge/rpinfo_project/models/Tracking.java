@@ -1,8 +1,12 @@
 package rpinfo.challenge.rpinfo_project.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Tracking {
 
     @Id

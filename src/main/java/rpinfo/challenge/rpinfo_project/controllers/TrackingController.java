@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rpinfo.challenge.rpinfo_project.models.Tracking;
+import rpinfo.challenge.rpinfo_project.models.dtos.TrackingDTO;
 import rpinfo.challenge.rpinfo_project.services.TrackingService;
 
 import java.util.Optional;
@@ -17,8 +18,8 @@ public class TrackingController {
     private TrackingService trackingService;
 
     @PostMapping
-    public ResponseEntity<Tracking> createTracking(@RequestBody Tracking tracking) {
-        Tracking createdTracking = trackingService.createTracking(tracking);
+    public ResponseEntity<Tracking> createTracking(@RequestBody TrackingDTO trackingDTO) {
+        Tracking createdTracking = trackingService.createTracking(trackingDTO);
         return new ResponseEntity<>(createdTracking, HttpStatus.CREATED);
     }
 }
