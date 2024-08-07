@@ -9,6 +9,7 @@ import rpinfo.challenge.rpinfo_project.models.dtos.TrackingDTO;
 import rpinfo.challenge.rpinfo_project.repositories.ServiceOrderRepository;
 import rpinfo.challenge.rpinfo_project.repositories.TrackingRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class TrackingService {
         } else {
             throw new RuntimeException("Service order not found");
         }
+    }
+
+    public List<Tracking> getTrackingsByServiceOrderId(Long serviceOrderId) {
+        return trackingRepository.findByServiceOrderId(serviceOrderId);
     }
 }
