@@ -28,11 +28,36 @@ class ClientControllerTest {
 
     @Test
     void createClient() {
-        assertEquals(1, 1);
+        Client client = new Client();
+        client.setName("Test Client");
+        client.setAddress("Test Address");
+        client.setPhone("999-999");
+        client.setEmail("test@test.com");
+
+        when(clientService.createClient(client)).thenReturn(client);
+
+        ResponseEntity<Client> response = clientController.createClient(client);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(client, response.getBody());
+
+        verify(clientService, times(1)).createClient(client);
     }
 
     @Test
     void getClientById() {
-        assertEquals(1, 1);
+        Client client = new Client();
+        client.setId(1L);
+        client.setName("Test Client");
+        client.setAddress("Test Address");
+        client.setPhone("999-999");
+        client.setEmail("test@test.com");
+
+        when(clientService.getClientById(1L)).thenReturn(client);
+
+        ResponseEntity<Client> response = clientController.getClientById(1L);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(client, response.getBody());
+
+        verify(clientService, times(1)).getClientById(1L);
     }
 }
