@@ -28,11 +28,32 @@ class EquipmentControllerTest {
 
     @Test
     void createEquipment() {
-        assertEquals(1, 1);
+        Equipment equipment = new Equipment();
+        equipment.setBrand("Test Brand");
+        equipment.setType("Test Type");
+
+        when(equipmentService.createEquipment(equipment)).thenReturn(equipment);
+
+        ResponseEntity<Equipment> response = equipmentController.createEquipment(equipment);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(equipment, response.getBody());
+
+        verify(equipmentService, times(1)).createEquipment(equipment);
     }
 
     @Test
     void getEquipmentById() {
-        assertEquals(1, 1);
+        Equipment equipment = new Equipment();
+        equipment.setId(1L);
+        equipment.setBrand("Test Brand");
+        equipment.setType("Test Type");
+
+        when(equipmentService.getEquipmentById(1L)).thenReturn(equipment);
+
+        ResponseEntity<Equipment> response = equipmentController.getEquipmentById(1L);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(equipment, response.getBody());
+
+        verify(equipmentService, times(1)).getEquipmentById(1L);
     }
 }
