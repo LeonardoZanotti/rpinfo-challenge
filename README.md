@@ -92,8 +92,8 @@ Controlador responsável por gerenciar as ordens de serviço.
 
 Controlador responsável por gerenciar os acompanhamentos de ordens de serviço.
 
-- **POST /tracking**: Adicionar um acompanhamento a uma ordem de serviço.
-- **GET /tracking/byServiceOrder/{serviceOrderId}**: Listar todos os acompanhamentos de uma ordem de serviço.
+- **POST /{serviceOrderId}/tracking**: Adicionar um acompanhamento a uma ordem de serviço.
+- **GET /{serviceOrderId}/tracking**: Listar todos os acompanhamentos de uma ordem de serviço.
 
 ## Endpoints
 
@@ -144,12 +144,12 @@ Controlador responsável por gerenciar os acompanhamentos de ordens de serviço.
 
 ### Acompanhamentos
 
-- **POST /tracking**
+- **POST /{serviceOrderId}/tracking**
   - Descrição: Adicionar um acompanhamento a uma ordem de serviço.
-  - Parâmetros: JSON contendo o campo `serviceOrderId` e `description`.
+  - Parâmetros: `serviceOrderId` da ordem de serviço na URL e JSON contendo o campo `description`.
   - Resposta: JSON do acompanhamento criado.
 
-- **GET /tracking/byServiceOrder/{serviceOrderId}**
+- **GET /{serviceOrderId}/tracking**
   - Descrição: Listar todos os acompanhamentos de uma ordem de serviço.
   - Parâmetros: `serviceOrderId` da ordem de serviço na URL.
   - Resposta: Lista de acompanhamentos.
