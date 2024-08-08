@@ -17,6 +17,8 @@ Este projeto é uma API REST para um sistema de controle de manutenção de equi
 
 ## Modelos e DTOs
 
+![](./database_diagram.png)
+
 ### Client
 
 Modelo que representa um cliente no sistema. Contém os seguintes campos:
