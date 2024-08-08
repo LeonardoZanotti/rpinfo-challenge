@@ -17,123 +17,141 @@ Este projeto é uma API REST para um sistema de controle de manutenção de equi
 
 ## Modelos e DTOs
 
-### Cliente
+### Client
 
 Modelo que representa um cliente no sistema. Contém os seguintes campos:
-- **id**: Identificador único do cliente.
-- **name**: Nome do cliente.
+- **id** *(Long)*: Identificador único do cliente.
+- **name** *(String)*: Nome do cliente.
+- **address** *(String)*: Endereço do cliente.
+- **phone** *(String)*: Telefone do cliente.
+- **email** *(String)*: Email do cliente.
 
-### Equipamento
+### Equipment
 
 Modelo que representa um equipamento no sistema. Contém os seguintes campos:
-- **id**: Identificador único do equipamento.
-- **description**: Descrição do equipamento.
+- **id** *(Long)*: Identificador único do equipamento.
+- **type** *(String)*: Tipo do equipamento.
+- **brand** *(String)*: Marca do equipamento.
 
-### Ordem de Serviço
+### ServiceOrder
 
 Modelo que representa uma ordem de serviço no sistema. Contém os seguintes campos:
-- **id**: Identificador único da ordem de serviço.
-- **clientId**: Identificador do cliente associado à ordem de serviço.
-- **equipmentId**: Identificador do equipamento associado à ordem de serviço.
-- **description**: Descrição da ordem de serviço.
-- **status**: Status da ordem de serviço (PENDING, IN_PROGRESS, COMPLETED).
+- **id** *(Long)*: Identificador único da ordem de serviço.
+- **client** *(Client)*: Cliente associado à ordem de serviço.
+- **equipment** *(Equipment)*: Equipamento associado à ordem de serviço.
+- **description** *(String)*: Descrição da ordem de serviço.
+- **pending** *(Boolean)*: Define se a ordem de serviço é pendente ou não.
+- **started** *(Boolean)*: Define se a ordem de serviço já foi iniciada ou não.
 
-### Acompanhamento
+### ServiceOrder (DTO)
+
+Modelo DTO usado na transferência de dados que representa uma ordem de serviço no sistema. Contém os seguintes campos:
+- **clientId** *(Long)*: Identificador único do cliente associado à ordem de serviço.
+- **equipmentId** *(Long)*: Identificador único do equipamento associado à ordem de serviço.
+- **description** *(String)*: Descrição da ordem de serviço.
+
+### Tracking
 
 Modelo que representa um acompanhamento de uma ordem de serviço. Contém os seguintes campos:
 - **id**: Identificador único do acompanhamento.
-- **serviceOrderId**: Identificador da ordem de serviço associada.
-- **description**: Descrição do acompanhamento.
+- **serviceOrder**  *(ServiceOrder)*: Ordem de serviço associada.
+- **description** *(String)*: Descrição do acompanhamento.
+
+### Tracking (DTO)
+
+Modelo DTO usado na transferência de dados que representa um acompanhamento de uma ordem de serviço. Contém os seguintes campos:
+- **serviceOrderId**  *(Long)*:  Identificador único da ordem de serviço associada.
+- **description** *(String)*: Descrição do acompanhamento.
 
 ## Controladores
 
-### ClienteController
+### ClientController
 
 Controlador responsável por gerenciar os clientes.
 
-- **POST /clientes**: Criar um novo cliente.
-- **GET /clientes/{id}**: Consultar um cliente por ID.
+- **POST /client**: Criar um novo cliente.
+- **GET /client/{id}**: Consultar um cliente por ID.
 
-### EquipamentoController
+### EquipmentController
 
 Controlador responsável por gerenciar os equipamentos.
 
-- **POST /equipamentos**: Criar um novo equipamento.
-- **GET /equipamentos/{id}**: Consultar um equipamento por ID.
+- **POST /equipment**: Criar um novo equipamento.
+- **GET /equipment/{id}**: Consultar um equipamento por ID.
 
-### OrdemDeServicoController
+### ServiceOrderController
 
 Controlador responsável por gerenciar as ordens de serviço.
 
-- **POST /ordens-servico**: Criar uma nova ordem de serviço.
-- **GET /ordens-servico/pendentes**: Consultar ordens de serviço pendentes.
-- **PUT /ordens-servico/{id}/iniciar**: Registrar início do atendimento de uma ordem de serviço.
-- **PUT /ordens-servico/{id}/concluir**: Registrar término do atendimento de uma ordem de serviço.
+- **POST /service-order**: Criar uma nova ordem de serviço.
+- **GET /service-order/pending**: Consultar ordens de serviço pendentes.
+- **PUT /service-order/{id}/start**: Registrar início do atendimento de uma ordem de serviço.
+- **PUT /service-order/{id}/complete**: Registrar término do atendimento de uma ordem de serviço.
 
-### AcompanhamentoController
+### TrackingController
 
 Controlador responsável por gerenciar os acompanhamentos de ordens de serviço.
 
-- **POST /ordens-servico/{id}/acompanhamentos**: Adicionar um acompanhamento a uma ordem de serviço.
-- **GET /ordens-servico/{id}/acompanhamentos**: Listar todos os acompanhamentos de uma ordem de serviço.
+- **POST /tracking**: Adicionar um acompanhamento a uma ordem de serviço.
+- **GET /tracking/byServiceOrder/{serviceOrderId}**: Listar todos os acompanhamentos de uma ordem de serviço.
 
 ## Endpoints
 
 ### Clientes
 
-- **POST /clientes**
+- **POST /client**
   - Descrição: Criar um novo cliente.
-  - Parâmetros: JSON contendo o campo `name`.
+  - Parâmetros: JSON contendo o campo `name`, `address`, `phone` e `email`.
   - Resposta: JSON do cliente criado.
 
-- **GET /clientes/{id}**
+- **GET /client/{id}**
   - Descrição: Consultar um cliente por ID.
   - Parâmetros: `id` do cliente na URL.
   - Resposta: JSON do cliente.
 
 ### Equipamentos
 
-- **POST /equipamentos**
+- **POST /equipment**
   - Descrição: Criar um novo equipamento.
-  - Parâmetros: JSON contendo o campo `description`.
+  - Parâmetros: JSON contendo o campo `type` e `brand`.
   - Resposta: JSON do equipamento criado.
 
-- **GET /equipamentos/{id}**
+- **GET /equipment/{id}**
   - Descrição: Consultar um equipamento por ID.
   - Parâmetros: `id` do equipamento na URL.
   - Resposta: JSON do equipamento.
 
 ### Ordens de Serviço
 
-- **POST /ordens-servico**
+- **POST /service-order**
   - Descrição: Criar uma nova ordem de serviço.
   - Parâmetros: JSON contendo os campos `clientId`, `equipmentId` e `description`.
   - Resposta: JSON da ordem de serviço criada.
 
-- **GET /ordens-servico/pendentes**
+- **GET /service-order/pending**
   - Descrição: Consultar ordens de serviço pendentes.
   - Resposta: Lista de ordens de serviço pendentes.
 
-- **PUT /ordens-servico/{id}/iniciar**
+- **PUT /service-order/{id}/start**
   - Descrição: Registrar início do atendimento de uma ordem de serviço.
   - Parâmetros: `id` da ordem de serviço na URL.
   - Resposta: JSON da ordem de serviço atualizada.
 
-- **PUT /ordens-servico/{id}/concluir**
+- **PUT /service-order/{id}/complete**
   - Descrição: Registrar término do atendimento de uma ordem de serviço.
   - Parâmetros: `id` da ordem de serviço na URL.
   - Resposta: JSON da ordem de serviço atualizada.
 
 ### Acompanhamentos
 
-- **POST /ordens-servico/{id}/acompanhamentos**
+- **POST /tracking**
   - Descrição: Adicionar um acompanhamento a uma ordem de serviço.
-  - Parâmetros: `id` da ordem de serviço na URL e JSON contendo o campo `description`.
+  - Parâmetros:JSON contendo o campo `serviceOrderId` e `description`.
   - Resposta: JSON do acompanhamento criado.
 
-- **GET /ordens-servico/{id}/acompanhamentos**
+- **GET /tracking/byServiceOrder/{serviceOrderId}**
   - Descrição: Listar todos os acompanhamentos de uma ordem de serviço.
-  - Parâmetros: `id` da ordem de serviço na URL.
+  - Parâmetros: `serviceOrderId` da ordem de serviço na URL.
   - Resposta: Lista de acompanhamentos.
 
 ## Serviços e Repositórios
@@ -174,7 +192,7 @@ Repositório para acesso aos dados dos acompanhamentos.
 
 Os testes unitários foram criados para verificar a funcionalidade dos controladores e serviços.
 
-### ClienteControllerTest
+### ClientControllerTest
 
 Testa as operações do controlador de clientes.
 
@@ -261,3 +279,5 @@ src
 ││││││ ├── ServiceOrderControllerTest.java
 ││││││ └── TrackingControllerTest.java
 ```
+
+#### Leonardo Zanotti
