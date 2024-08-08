@@ -42,6 +42,10 @@ public class ServiceOrderService {
         }
     }
 
+    public ServiceOrder getServiceOrderById(Long id) {
+        return serviceOrderRepository.findById(id).orElse(null);
+    }
+
     public List<ServiceOrder> getPendingServiceOrders() {
         return serviceOrderRepository.findByPending(true);
     }
