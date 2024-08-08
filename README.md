@@ -146,7 +146,7 @@ Controlador responsável por gerenciar os acompanhamentos de ordens de serviço.
 
 - **POST /tracking**
   - Descrição: Adicionar um acompanhamento a uma ordem de serviço.
-  - Parâmetros:JSON contendo o campo `serviceOrderId` e `description`.
+  - Parâmetros: JSON contendo o campo `serviceOrderId` e `description`.
   - Resposta: JSON do acompanhamento criado.
 
 - **GET /tracking/byServiceOrder/{serviceOrderId}**
